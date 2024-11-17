@@ -1,7 +1,26 @@
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import LikeButton from '../LikeButton/LikeButton';
+import CommentSection from '../CommentSection/CommentSection';
+import { calculateReadTime } from '../../utils/readTime';
 import './BlogPost.css';
 
-function BlogPost({ title, content, author, date, readTime }) {
+function BlogPost({ id, title, content, author, date }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [readTime, setReadTime] = useState(0);
+
+  useEffect(() => {
+    setReadTime(calculateReadTime(content));
+  }, [content]);
+
+  const toggleContent = () => {
+    setIsExpanded(prev => !prev);
+  };
+
+  const displayContent = isExpanded 
+    ? content 
+    : content.slice(0, 200) + (content.length > 200 ? '...' : '');
+
   return (
     <article className="blog-post">
       <div className="blog-post__header">
@@ -14,18 +33,31 @@ function BlogPost({ title, content, author, date, readTime }) {
       </div>
       
       <div className="blog-post__content">
-        {content}
+        <p>{displayContent}</p>
+        {content.length > 200 && (
+          <button 
+            onClick={toggleContent}
+            className="blog-post__expand"
+          >
+            {isExpanded ? 'Read less' : 'Read more'}
+          </button>
+        )}
+      </div>
+
+      <div className="blog-post__actions">
+        <LikeButton initialLikes={0} />
+        <CommentSection postId={id} />
       </div>
     </article>
   );
 }
 
 BlogPost.propTypes = {
-  title: PropTypes.string.required,
-  content: PropTypes.string.required,
-  author: PropTypes.string.required,
-  date: PropTypes.string.required,
-  readTime: PropTypes.number.required
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired
 };
 
 export default BlogPost;
