@@ -1,3 +1,34 @@
+/* Blog Post Category */
+.blog-post__category {
+  margin: 1rem 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Blog Post Tags */
+.blog-post__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.blog-post__tag {
+  background-color: #f1f1f1;
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.blog-post__tag:hover {
+  background-color: #e0e0e0;
+}
+
+
+
+
 .blog-post {
     max-width: 800px;
     margin: 2rem auto;
