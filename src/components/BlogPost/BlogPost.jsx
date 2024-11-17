@@ -5,7 +5,7 @@ import CommentSection from '../CommentSection/CommentSection';
 import { calculateReadTime } from '../../utils/readTime';
 import './BlogPost.css';
 
-function BlogPost({ id, title, content, author, date }) {
+function BlogPost({ id, title, content, author, date, category, tags }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [readTime, setReadTime] = useState(0);
 
@@ -42,6 +42,20 @@ function BlogPost({ id, title, content, author, date }) {
             {isExpanded ? 'Read less' : 'Read more'}
           </button>
         )}
+      </div>
+      {/* Display category */}
+      <div className="blog-post__category">
+        <strong>Category:</strong> {category}
+      </div>
+
+      {/* Display tags */}
+      <div className="blog-post__tags">
+        <strong>Tags:</strong>{' '}
+        {tags.map((tag, index) => (
+          <span key={index} className="blog-post__tag">
+            {tag}
+          </span>
+        ))}
       </div>
 
       <div className="blog-post__actions">
