@@ -21,11 +21,11 @@ function BlogPost({ title, content, author, date, readTime }) {
 }
 
 BlogPost.propTypes = {
-  title: PropTypes.string.required,
-  content: PropTypes.string.required,
-  author: PropTypes.string.required,
-  date: PropTypes.string.required,
-  readTime: PropTypes.number.required
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  readTime: PropTypes.number.isRequired
 };
 
 export default BlogPost;
